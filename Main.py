@@ -225,7 +225,12 @@ def run_streamlit(model):
 
 if __name__ == "__main__":
     # modify the path below if your CSV is stored elsewhere
-    csv_path = "C:\\Users\\Raviteja Ramisetty\\Downloads\\StudentPerformanceFactors.csv"
+    # For cloud deployment, place the CSV in the same directory as Main.py
+    import os
+    csv_path = os.path.join(os.path.dirname(__file__), "StudentPerformanceFactors.csv")
+    if not os.path.exists(csv_path):
+        # Fallback to the original path for local Windows
+        csv_path = "C:\\Users\\Raviteja Ramisetty\\Downloads\\StudentPerformanceFactors.csv"
     model = train_model(csv_path)
     if st:
         run_streamlit(model)
